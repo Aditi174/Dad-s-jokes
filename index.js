@@ -14,15 +14,23 @@ const options = {
 const apiURL = "https://api.api-ninjas.com/v1/dadjokes?limit=1";
 
 async function getjokes(){
-    jokes.style.display = "none";
-    spinner.style.display = "block" ;   
+    try{
+        jokes.style.display = "none";
+        spinner.style.display = "block" ;   
 
-    const response = await fetch(apiURL,options);
-    const data = await response.json();
-    jokes.innerText = data[0].joke
+        const response = await fetch(apiURL,options);
 
-    jokes.style.display = "block";
-    spinner.style.display = "none"  
-    console.log("help", data)
+        const data = await response.json();
+        jokes.innerText = data[0].joke
+
+        jokes.style.display = "block";
+        spinner.style.display = "none"  
+        console.log("help", data)
+    }catch(error){
+        spinner.style.display = "none"
+        jokes.innerText = "An error happened, try again later"
+        console.log(error)
+    }
+    
 }
 
